@@ -1,0 +1,50 @@
+# .dcs/pages.yaml
+# Page registry for DCS CMS integration
+# TechFlow Solutions - Enterprise Demo
+
+version: 3
+siteSlug: demo-5
+lastUpdated: "2026-01-08T00:00:00Z"
+generatedBy: manual-setup
+
+pages:
+  - slug: home
+    path: /
+    type: static
+    title: Home
+    deletable: false
+
+  - slug: solutions
+    path: /solutions
+    type: static
+    title: Solutions
+    deletable: false
+
+  - slug: industries
+    path: /industries
+    type: static
+    title: Industries
+    deletable: true
+
+  - slug: about
+    path: /about
+    type: static
+    title: About
+    deletable: true
+
+  - slug: contact
+    path: /contact
+    type: static
+    title: Contact
+    deletable: false
+
+excluded:
+  - /404
+  - /_*
+
+snapshot:
+  viewport:
+    width: 1280
+    height: 720
+  waitAfterLoad: 3000
+  captureFullPage: true

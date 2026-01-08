@@ -1,0 +1,46 @@
+# .dcs/seo.yaml
+# Managed by DCS Portal - Do not edit manually
+# SEO configuration for FitnessPro Gym
+
+version: 1
+lastUpdated: "2026-01-07T00:00:00Z"
+updatedBy: "system"
+
+global:
+  siteName: FitnessPro Gym
+  siteUrl: https://demo-5.duffcloudservices.com
+  locale: en_US
+  defaultTitle: FitnessPro Gym | Transform Your Body & Mind
+  defaultDescription: State-of-the-art fitness facilities, expert trainers, and group classes. Start your fitness journey today with a free trial.
+  titleTemplate: "%s | FitnessPro Gym"
+  robots: "index, follow"
+
+  social:
+    twitter: "@fitnessprogym"
+    instagram: "fitnessprogym"
+
+  images:
+    logo: https://demo-5.duffcloudservices.com/logo.svg
+    ogDefault: https://demo-5.duffcloudservices.com/og-image.jpg
+
+pages:
+  home:
+    title: "Transform Your Body & Mind"
+    description: "State-of-the-art fitness facilities, expert trainers, and group classes. Start your fitness journey today with a free trial."
+    noTitleTemplate: true
+
+  classes:
+    title: "Fitness Classes"
+    description: "From yoga to HIIT, discover group fitness classes for all levels. Join our supportive community and reach your goals."
+
+  trainers:
+    title: "Our Trainers"
+    description: "Meet our certified personal trainers dedicated to helping you achieve your fitness goals with customized programs."
+
+  membership:
+    title: "Membership Plans"
+    description: "Flexible gym membership options starting at $29/month. Get started with a free trial - no commitment required."
+
+  contact:
+    title: "Contact Us"
+    description: "Questions about FitnessPro Gym? Contact us today. We're here to help you start your fitness journey."

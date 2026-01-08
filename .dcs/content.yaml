@@ -1,0 +1,84 @@
+# .dcs/content.yaml
+# Managed by DCS Portal - Do not edit manually
+# Text content for FitnessPro Gym
+
+version: 1
+lastUpdated: "2026-01-07T00:00:00Z"
+updatedBy: "system"
+
+global:
+  nav.home: Home
+  nav.classes: Classes
+  nav.trainers: Trainers
+  nav.membership: Membership
+  nav.contact: Contact
+  footer.copyright: © 2026 FitnessPro Gym. All rights reserved.
+  footer.address: "123 Fitness Ave, San Francisco, CA 94102"
+  cta.startTrial: Start Free Trial
+  cta.joinNow: Join Now
+
+pages:
+  home:
+    hero.title: "Transform Your"
+    hero.highlight: "Body & Mind"
+    hero.subtitle: "State-of-the-art facilities, expert trainers, and a supportive community to help you reach your fitness goals."
+    hero.cta.primary: "Start Free Trial"
+    hero.cta.secondary: "View Classes"
+    stats.members: "5,000+"
+    stats.members.label: "Active Members"
+    stats.classes: "50+"
+    stats.classes.label: "Weekly Classes"
+    stats.trainers: "25"
+    stats.trainers.label: "Expert Trainers"
+    stats.hours: "24/7"
+    stats.hours.label: "Open Hours"
+    features.title: "Why Choose FitnessPro?"
+    features.subtitle: "Everything you need for a complete fitness experience under one roof"
+    features.equipment.title: "Premium Equipment"
+    features.equipment.description: "Top-of-the-line cardio machines, free weights, and functional training areas."
+    features.classes.title: "Group Classes"
+    features.classes.description: "From yoga to HIIT, find the perfect class for your fitness level and goals."
+    features.trainers.title: "Personal Training"
+    features.trainers.description: "Work one-on-one with certified trainers who customize your workout plan."
+    classes.title: "Popular Classes"
+    cta.title: "Ready to Start Your Fitness Journey?"
+    cta.subtitle: "Join today and get your first week free. No commitment required."
+    cta.button: "Get Started Today →"
+
+  classes:
+    hero.title: "Our Classes"
+    hero.subtitle: "From high-intensity training to mindful movement, we have something for everyone."
+    yoga.title: "Yoga Flow"
+    yoga.description: "Build flexibility and strength while finding inner peace."
+    hiit.title: "HIIT Training"
+    hiit.description: "Maximum results in minimum time with high-intensity intervals."
+    spin.title: "Spin Class"
+    spin.description: "High-energy cycling to boost your cardio endurance."
+    strength.title: "Strength Training"
+    strength.description: "Build muscle and increase power with guided weight training."
+
+  trainers:
+    hero.title: "Meet Our Trainers"
+    hero.subtitle: "Certified professionals dedicated to helping you succeed."
+    
+  membership:
+    hero.title: "Membership Plans"
+    hero.subtitle: "Flexible options to fit your lifestyle and budget."
+    basic.title: "Basic"
+    basic.price: "$29/month"
+    basic.features: "Gym access, locker room, basic equipment"
+    premium.title: "Premium"
+    premium.price: "$49/month"
+    premium.features: "All Basic features + unlimited classes, spa access"
+    elite.title: "Elite"
+    elite.price: "$99/month"
+    elite.features: "All Premium features + personal training sessions, nutrition coaching"
+
+  contact:
+    hero.title: "Contact Us"
+    hero.subtitle: "Have questions? We'd love to hear from you."
+    form.name: "Full Name"
+    form.email: "Email Address"
+    form.phone: "Phone Number"
+    form.message: "How can we help?"
+    form.submit: "Send Message"
