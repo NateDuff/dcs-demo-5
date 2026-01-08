@@ -1,0 +1,10 @@
+# DCS Site Configuration
+# This file configures the integration between this site and DCS Portal
+
+site_slug: demo-5
+site_name: Angular Demo Site
+storage_account: stdemositefive
+output_location: dist/browser
+
+# Site hosting (static blob storage for demo sites)
+production_url: https://stdemositefive.z22.web.core.windows.net/
