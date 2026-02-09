@@ -110,7 +110,7 @@ import { CommonModule } from '@angular/common';
           </div>
           <div class="border-t border-zinc-700 mt-8 pt-8 text-center text-zinc-400 text-sm">
             <p>© 2026 FitnessPro Gym. All rights reserved.</p>
-            <p class="mt-2 text-xs">Demo Site 5 — Powered by DCS</p>
+            <p class="mt-2 text-xs">Demo Site 5 — Powered by Duff Cloud Services</p>
           </div>
         </div>
       </footer>
