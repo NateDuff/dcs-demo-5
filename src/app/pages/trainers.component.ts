@@ -1,21 +1,33 @@
 import { Component } from '@angular/core';
 
+// Simple content helper
+declare const __DCS_CONTENT__: { global?: Record<string, string>; pages?: Record<string, Record<string, string>> } | undefined;
+
+function t(page: string, key: string, fallback: string): string {
+  try {
+    if (typeof __DCS_CONTENT__ !== 'undefined' && __DCS_CONTENT__?.pages?.[page]?.[key]) {
+      return __DCS_CONTENT__.pages[page][key];
+    }
+  } catch {}
+  return fallback;
+}
+
 @Component({
   selector: 'app-trainers',
   standalone: true,
   template: `
     <!-- Hero -->
-    <section class="py-20 bg-gradient-to-b from-zinc-800/50 to-zinc-900">
+    <section data-section="hero" data-section-label="Hero Banner" class="py-20 bg-gradient-to-b from-zinc-800/50 to-zinc-900">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Meet Our Trainers</h1>
-        <p class="text-xl text-zinc-300 max-w-3xl mx-auto">
-          Certified experts dedicated to helping you achieve your fitness goals.
+        <h1 data-text-key="hero.title" class="text-4xl md:text-5xl font-bold text-white mb-6">{{ heroTitle }}</h1>
+        <p data-text-key="hero.subtitle" class="text-xl text-zinc-300 max-w-3xl mx-auto">
+          {{ heroSubtitle }}
         </p>
       </div>
     </section>
 
     <!-- Trainers Grid -->
-    <section class="py-20">
+    <section data-section="trainers" data-section-label="Our Trainers" data-dynamic="true" class="py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           @for (trainer of trainers; track trainer.name) {
@@ -43,6 +55,9 @@ import { Component } from '@angular/core';
   `
 })
 export class TrainersComponent {
+  heroTitle = t('trainers', 'hero.title', 'Meet Our Trainers');
+  heroSubtitle = t('trainers', 'hero.subtitle', 'Certified experts dedicated to helping you achieve your fitness goals.');
+
   trainers = [
     { name: 'Mike Rodriguez', initials: 'MR', specialty: 'HIIT & Strength', bio: '10+ years of experience. Former college athlete. Specializes in body transformation.', certifications: ['NASM CPT', 'CrossFit L2', 'Sports Nutrition'] },
     { name: 'Sarah Lin', initials: 'SL', specialty: 'Yoga & Pilates', bio: '500-hour certified yoga instructor. Focuses on flexibility and mindfulness.', certifications: ['RYT-500', 'Pilates Mat', 'Meditation'] },

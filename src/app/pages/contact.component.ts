@@ -1,30 +1,42 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+// Simple content helper
+declare const __DCS_CONTENT__: { global?: Record<string, string>; pages?: Record<string, Record<string, string>> } | undefined;
+
+function t(page: string, key: string, fallback: string): string {
+  try {
+    if (typeof __DCS_CONTENT__ !== 'undefined' && __DCS_CONTENT__?.pages?.[page]?.[key]) {
+      return __DCS_CONTENT__.pages[page][key];
+    }
+  } catch {}
+  return fallback;
+}
+
 @Component({
   selector: 'app-contact',
   standalone: true,
   imports: [FormsModule],
   template: `
     <!-- Hero -->
-    <section class="py-20 bg-gradient-to-b from-zinc-800/50 to-zinc-900">
+    <section data-section="hero" data-section-label="Hero Banner" class="py-20 bg-gradient-to-b from-zinc-800/50 to-zinc-900">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Start Your Free Trial</h1>
-        <p class="text-xl text-zinc-300 max-w-3xl mx-auto">
-          Fill out the form below and one of our team members will get back to you within 24 hours.
+        <h1 data-text-key="hero.title" class="text-4xl md:text-5xl font-bold text-white mb-6">{{ heroTitle }}</h1>
+        <p data-text-key="hero.subtitle" class="text-xl text-zinc-300 max-w-3xl mx-auto">
+          {{ heroSubtitle }}
         </p>
       </div>
     </section>
 
     <!-- Form -->
-    <section class="py-20">
+    <section data-section="form" data-section-label="Contact Form" class="py-20">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         @if (submitted) {
           <div class="text-center py-16">
             <div class="text-6xl mb-6">🎉</div>
-            <h2 class="text-2xl font-bold text-white mb-4">Welcome to FitnessPro!</h2>
-            <p class="text-zinc-300">
-              We've received your information. Check your email for your free trial pass and next steps!
+            <h2 data-text-key="success.title" class="text-2xl font-bold text-white mb-4">{{ successTitle }}</h2>
+            <p data-text-key="success.message" class="text-zinc-300">
+              {{ successMessage }}
             </p>
           </div>
         } @else {
@@ -78,9 +90,9 @@ import { FormsModule } from '@angular/forms';
                 placeholder="Tell us about your fitness goals..."></textarea>
             </div>
 
-            <button type="submit"
+            <button type="submit" data-text-key="form.submit"
               class="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white py-4 rounded-lg font-semibold transition-all">
-              Claim Your Free Trial
+              {{ submitLabel }}
             </button>
           </form>
         }
@@ -88,24 +100,24 @@ import { FormsModule } from '@angular/forms';
     </section>
 
     <!-- Location -->
-    <section class="py-20 bg-zinc-800/50">
+    <section data-section="location" data-section-label="Contact Information" class="py-20 bg-zinc-800/50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-white text-center mb-12">Visit Us</h2>
+        <h2 data-text-key="location.title" class="text-3xl font-bold text-white text-center mb-12">{{ locationTitle }}</h2>
         <div class="grid md:grid-cols-3 gap-8 text-center">
           <div>
             <div class="text-3xl mb-4">📍</div>
-            <h3 class="font-semibold text-white mb-2">Location</h3>
-            <p class="text-zinc-400">456 Fitness Avenue<br />Denver, CO 80202</p>
+            <h3 data-text-key="location.address.title" class="font-semibold text-white mb-2">{{ addressTitle }}</h3>
+            <p data-text-key="location.address.value" class="text-zinc-400">{{ addressValue }}</p>
           </div>
           <div>
             <div class="text-3xl mb-4">⏰</div>
-            <h3 class="font-semibold text-white mb-2">Hours</h3>
-            <p class="text-zinc-400">Mon-Fri: 5am - 11pm<br />Sat-Sun: 6am - 9pm</p>
+            <h3 data-text-key="location.hours.title" class="font-semibold text-white mb-2">{{ hoursTitle }}</h3>
+            <p data-text-key="location.hours.value" class="text-zinc-400">{{ hoursValue }}</p>
           </div>
           <div>
             <div class="text-3xl mb-4">📞</div>
-            <h3 class="font-semibold text-white mb-2">Contact</h3>
-            <p class="text-zinc-400">(303) 555-0199<br />info&#64;fitnessprogym.com</p>
+            <h3 data-text-key="location.contact.title" class="font-semibold text-white mb-2">{{ contactTitle }}</h3>
+            <p data-text-key="location.contact.value" class="text-zinc-400">{{ contactValue }}</p>
           </div>
         </div>
       </div>
@@ -113,6 +125,19 @@ import { FormsModule } from '@angular/forms';
   `
 })
 export class ContactComponent {
+  heroTitle = t('contact', 'hero.title', 'Start Your Free Trial');
+  heroSubtitle = t('contact', 'hero.subtitle', 'Fill out the form below and one of our team members will get back to you within 24 hours.');
+  successTitle = t('contact', 'success.title', 'Welcome to FitnessPro!');
+  successMessage = t('contact', 'success.message', "We've received your information. Check your email for your free trial pass and next steps!");
+  submitLabel = t('contact', 'form.submit', 'Claim Your Free Trial');
+  locationTitle = t('contact', 'location.title', 'Visit Us');
+  addressTitle = t('contact', 'location.address.title', 'Location');
+  addressValue = t('contact', 'location.address.value', '456 Fitness Avenue, Denver, CO 80202');
+  hoursTitle = t('contact', 'location.hours.title', 'Hours');
+  hoursValue = t('contact', 'location.hours.value', 'Mon-Fri: 5am - 11pm, Sat-Sun: 6am - 9pm');
+  contactTitle = t('contact', 'location.contact.title', 'Contact');
+  contactValue = t('contact', 'location.contact.value', '(303) 555-0199 | info@fitnessprogym.com');
+
   submitted = false;
   form = {
     firstName: '',

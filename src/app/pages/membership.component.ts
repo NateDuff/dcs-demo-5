@@ -1,23 +1,35 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+// Simple content helper
+declare const __DCS_CONTENT__: { global?: Record<string, string>; pages?: Record<string, Record<string, string>> } | undefined;
+
+function t(page: string, key: string, fallback: string): string {
+  try {
+    if (typeof __DCS_CONTENT__ !== 'undefined' && __DCS_CONTENT__?.pages?.[page]?.[key]) {
+      return __DCS_CONTENT__.pages[page][key];
+    }
+  } catch {}
+  return fallback;
+}
+
 @Component({
   selector: 'app-membership',
   standalone: true,
   imports: [RouterLink],
   template: `
     <!-- Hero -->
-    <section class="py-20 bg-gradient-to-b from-zinc-800/50 to-zinc-900">
+    <section data-section="hero" data-section-label="Hero Banner" class="py-20 bg-gradient-to-b from-zinc-800/50 to-zinc-900">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Membership Plans</h1>
-        <p class="text-xl text-zinc-300 max-w-3xl mx-auto">
-          Choose the plan that fits your lifestyle. All memberships include a free week trial.
+        <h1 data-text-key="hero.title" class="text-4xl md:text-5xl font-bold text-white mb-6">{{ heroTitle }}</h1>
+        <p data-text-key="hero.subtitle" class="text-xl text-zinc-300 max-w-3xl mx-auto">
+          {{ heroSubtitle }}
         </p>
       </div>
     </section>
 
     <!-- Plans -->
-    <section class="py-20">
+    <section data-section="plans" data-section-label="Membership Plans" data-dynamic="true" class="py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-3 gap-8">
           @for (plan of plans; track plan.name) {
@@ -50,9 +62,9 @@ import { RouterLink } from '@angular/router';
     </section>
 
     <!-- FAQ -->
-    <section class="py-20 bg-zinc-800/50">
+    <section data-section="faq" data-section-label="Frequently Asked Questions" class="py-20 bg-zinc-800/50">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-white text-center mb-12">Frequently Asked Questions</h2>
+        <h2 data-text-key="faq.title" class="text-3xl font-bold text-white text-center mb-12">{{ faqTitle }}</h2>
         <div class="space-y-4">
           @for (faq of faqs; track faq.q) {
             <div class="bg-zinc-900 border border-zinc-700 rounded-xl p-6">
@@ -66,6 +78,10 @@ import { RouterLink } from '@angular/router';
   `
 })
 export class MembershipComponent {
+  heroTitle = t('membership', 'hero.title', 'Membership Plans');
+  heroSubtitle = t('membership', 'hero.subtitle', 'Choose the plan that fits your lifestyle. All memberships include a free week trial.');
+  faqTitle = t('membership', 'faq.title', 'Frequently Asked Questions');
+
   plans = [
     {
       name: 'Basic',

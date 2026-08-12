@@ -1,23 +1,35 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+// Simple content helper
+declare const __DCS_CONTENT__: { global?: Record<string, string>; pages?: Record<string, Record<string, string>> } | undefined;
+
+function t(page: string, key: string, fallback: string): string {
+  try {
+    if (typeof __DCS_CONTENT__ !== 'undefined' && __DCS_CONTENT__?.pages?.[page]?.[key]) {
+      return __DCS_CONTENT__.pages[page][key];
+    }
+  } catch {}
+  return fallback;
+}
+
 @Component({
   selector: 'app-classes',
   standalone: true,
   imports: [RouterLink],
   template: `
     <!-- Hero -->
-    <section class="py-20 bg-gradient-to-b from-zinc-800/50 to-zinc-900">
+    <section data-section="hero" data-section-label="Hero Banner" class="py-20 bg-gradient-to-b from-zinc-800/50 to-zinc-900">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Our Classes</h1>
-        <p class="text-xl text-zinc-300 max-w-3xl mx-auto">
-          From high-intensity workouts to mindful movement, find the perfect class for your goals.
+        <h1 data-text-key="hero.title" class="text-4xl md:text-5xl font-bold text-white mb-6">{{ heroTitle }}</h1>
+        <p data-text-key="hero.subtitle" class="text-xl text-zinc-300 max-w-3xl mx-auto">
+          {{ heroSubtitle }}
         </p>
       </div>
     </section>
 
     <!-- Class Categories -->
-    <section class="py-20">
+    <section data-section="categories" data-section-label="Class Categories" data-dynamic="true" class="py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           @for (category of classCategories; track category.name) {
@@ -41,9 +53,9 @@ import { RouterLink } from '@angular/router';
     </section>
 
     <!-- Schedule Preview -->
-    <section class="py-20 bg-zinc-800/50">
+    <section data-section="schedule" data-section-label="Today's Schedule" data-dynamic="true" class="py-20 bg-zinc-800/50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-white text-center mb-12">Today's Schedule</h2>
+        <h2 data-text-key="schedule.title" class="text-3xl font-bold text-white text-center mb-12">{{ scheduleTitle }}</h2>
         <div class="space-y-4">
           @for (session of todaySchedule; track session.time) {
             <div class="bg-zinc-900 border border-zinc-700 rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -69,6 +81,10 @@ import { RouterLink } from '@angular/router';
   `
 })
 export class ClassesComponent {
+  heroTitle = t('classes', 'hero.title', 'Our Classes');
+  heroSubtitle = t('classes', 'hero.subtitle', 'From high-intensity workouts to mindful movement, find the perfect class for your goals.');
+  scheduleTitle = t('classes', 'schedule.title', "Today's Schedule");
+
   classCategories = [
     { name: 'Cardio', icon: '🏃', description: 'Get your heart pumping with high-energy cardio workouts', gradient: 'from-orange-500/20 to-red-500/20', tags: ['HIIT', 'Spin', 'Dance', 'Running'] },
     { name: 'Strength', icon: '💪', description: 'Build muscle and increase power with resistance training', gradient: 'from-blue-500/20 to-purple-500/20', tags: ['Weights', 'CrossFit', 'Powerlifting'] },

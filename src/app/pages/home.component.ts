@@ -22,21 +22,21 @@ function t(page: string, key: string, fallback: string): string {
   imports: [RouterLink],
   template: `
     <!-- Hero Section -->
-    <section class="relative py-24 overflow-hidden">
+    <section data-section="hero" data-section-label="Hero Banner" class="relative py-24 overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-br from-orange-900/40 via-zinc-900 to-red-900/40"></div>
       <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-orange-500/10 via-transparent to-transparent"></div>
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in-down">
-          {{ heroTitle }} <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">{{ heroHighlight }}</span>
+          <span data-text-key="hero.title">{{ heroTitle }}</span> <span data-text-key="hero.highlight" class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">{{ heroHighlight }}</span>
         </h1>
-        <p class="text-xl text-zinc-300 mb-10 max-w-3xl mx-auto animate-fade-in-up delay-200">
+        <p data-text-key="hero.subtitle" class="text-xl text-zinc-300 mb-10 max-w-3xl mx-auto animate-fade-in-up delay-200">
           {{ heroSubtitle }}
         </p>
         <div class="flex flex-wrap justify-center gap-4 animate-fade-in-up delay-400">
-          <a routerLink="/membership" class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all hover:scale-105">
+          <a routerLink="/membership" data-text-key="hero.cta.primary" class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all hover:scale-105">
             {{ heroCta }}
           </a>
-          <a routerLink="/classes" class="border border-zinc-600 hover:border-zinc-500 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all hover:scale-105">
+          <a routerLink="/classes" data-text-key="hero.cta.secondary" class="border border-zinc-600 hover:border-zinc-500 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all hover:scale-105">
             {{ heroCtaSecondary }}
           </a>
         </div>
@@ -44,15 +44,15 @@ function t(page: string, key: string, fallback: string): string {
     </section>
 
     <!-- Stats -->
-    <section class="py-16 border-y border-zinc-800">
+    <section data-section="stats" data-section-label="Statistics" class="py-16 border-y border-zinc-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
           @for (stat of stats; track stat.label; let i = $index) {
             <div class="text-center animate-fade-in-up" [class]="'delay-' + ((i + 1) * 100)">
-              <div class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
+              <div [attr.data-text-key]="'stats.' + stat.key" class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
                 {{ stat.value }}
               </div>
-              <div class="text-zinc-400 mt-2">{{ stat.label }}</div>
+              <div [attr.data-text-key]="'stats.' + stat.key + '.label'" class="text-zinc-400 mt-2">{{ stat.label }}</div>
             </div>
           }
         </div>
@@ -60,10 +60,10 @@ function t(page: string, key: string, fallback: string): string {
     </section>
 
     <!-- Features -->
-    <section class="py-20">
+    <section data-section="features" data-section-label="Why Choose Us" data-dynamic="true" class="py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-4 animate-fade-in">{{ featuresTitle }}</h2>
-        <p class="text-zinc-400 text-center mb-12 max-w-2xl mx-auto animate-fade-in delay-100">
+        <h2 data-text-key="features.title" class="text-3xl md:text-4xl font-bold text-white text-center mb-4 animate-fade-in">{{ featuresTitle }}</h2>
+        <p data-text-key="features.subtitle" class="text-zinc-400 text-center mb-12 max-w-2xl mx-auto animate-fade-in delay-100">
           {{ featuresSubtitle }}
         </p>
         <div class="grid md:grid-cols-3 gap-8">
@@ -79,9 +79,9 @@ function t(page: string, key: string, fallback: string): string {
     </section>
 
     <!-- Classes Preview -->
-    <section class="py-20 bg-zinc-800/50">
+    <section data-section="classes" data-section-label="Popular Classes" data-dynamic="true" class="py-20 bg-zinc-800/50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-12 animate-fade-in">{{ classesTitle }}</h2>
+        <h2 data-text-key="classes.title" class="text-3xl md:text-4xl font-bold text-white text-center mb-12 animate-fade-in">{{ classesTitle }}</h2>
         <div class="grid md:grid-cols-4 gap-6">
           @for (cls of popularClasses; track cls.name; let i = $index) {
             <div class="bg-zinc-900 border border-zinc-700 rounded-xl overflow-hidden hover:border-orange-500/50 transition-all hover-lift animate-fade-in-up" [class]="'delay-' + ((i + 1) * 100)">
@@ -104,15 +104,15 @@ function t(page: string, key: string, fallback: string): string {
     </section>
 
     <!-- CTA -->
-    <section class="py-20">
+    <section data-section="cta" data-section-label="Call to Action" class="py-20">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 animate-fade-in">
+        <h2 data-text-key="cta.title" class="text-3xl md:text-4xl font-bold text-white mb-6 animate-fade-in">
           {{ ctaTitle }}
         </h2>
-        <p class="text-zinc-400 text-lg mb-8 animate-fade-in-up delay-100">
+        <p data-text-key="cta.subtitle" class="text-zinc-400 text-lg mb-8 animate-fade-in-up delay-100">
           {{ ctaSubtitle }}
         </p>
-        <a routerLink="/contact" class="inline-block bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-10 py-4 rounded-lg text-lg font-semibold transition-all hover:scale-105 animate-fade-in-up delay-200">
+        <a routerLink="/contact" data-text-key="cta.button" class="inline-block bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-10 py-4 rounded-lg text-lg font-semibold transition-all hover:scale-105 animate-fade-in-up delay-200">
           {{ ctaButton }}
         </a>
       </div>
@@ -140,10 +140,10 @@ export class HomeComponent {
   ctaButton = t('home', 'cta.button', 'Get Started Today →');
 
   stats = [
-    { value: t('home', 'stats.members', '5,000+'), label: t('home', 'stats.members.label', 'Active Members') },
-    { value: t('home', 'stats.classes', '50+'), label: t('home', 'stats.classes.label', 'Weekly Classes') },
-    { value: t('home', 'stats.trainers', '25'), label: t('home', 'stats.trainers.label', 'Expert Trainers') },
-    { value: t('home', 'stats.hours', '24/7'), label: t('home', 'stats.hours.label', 'Open Hours') }
+    { key: 'members', value: t('home', 'stats.members', '5,000+'), label: t('home', 'stats.members.label', 'Active Members') },
+    { key: 'classes', value: t('home', 'stats.classes', '50+'), label: t('home', 'stats.classes.label', 'Weekly Classes') },
+    { key: 'trainers', value: t('home', 'stats.trainers', '25'), label: t('home', 'stats.trainers.label', 'Expert Trainers') },
+    { key: 'hours', value: t('home', 'stats.hours', '24/7'), label: t('home', 'stats.hours.label', 'Open Hours') }
   ];
 
   features = [
