@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "ng serve",
-    "build": "ng build --configuration production && pnpm run inject-content",
+    "build": "ng build --configuration production && pnpm run inject-content && node scripts/emit-route-files.mjs",
     "inject-content": "dcs-inject dist/browser",
     "watch": "ng build --watch --configuration development"
   },
