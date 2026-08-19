@@ -10,6 +10,20 @@ import { CommonModule } from '@angular/common';
     <div class="min-h-screen bg-zinc-900">
       <!-- Navigation -->
       <nav class="bg-zinc-800/80 backdrop-blur-lg border-b border-zinc-700 sticky top-0 z-50">
+        <!--
+          C-486 §9.5 step 2 — fictional-demo disclosure.
+          Deliberately NOT instrumented with data-text-key: this is a compliance
+          statement, not managed content, and must not be editable or removable
+          from the visual editor. It lives inside the sticky nav so it stays
+          visible on every route and at every scroll position.
+        -->
+        <div
+          data-demo-disclosure
+          class="bg-amber-400 text-slate-900 text-center text-xs sm:text-sm font-medium px-4 py-2"
+        >
+          Demonstration site — this business is fictional. Built by
+          <a href="https://duffcloudservices.com" class="underline hover:no-underline">Duff Cloud Services</a>.
+        </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex justify-between h-16">
             <div class="flex items-center">
